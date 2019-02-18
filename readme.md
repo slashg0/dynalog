@@ -1,7 +1,9 @@
 #Dynalog
 
 ##Dynalog = Dynamic Dialog
-
+ 
+ [ ![Download](https://api.bintray.com/packages/slashg0/maven/dynalog/images/download.svg) ](https://bintray.com/slashg0/maven/dynalog/_latestVersion)
+ 
 It's a simple library to init a beautiful dialog with the following components:
 
 [*] Header Image
