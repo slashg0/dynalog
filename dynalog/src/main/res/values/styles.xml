@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="AppTheme.Dialog"
+		   parent="Theme.AppCompat.Light.Dialog.Alert">
+		<item name="android:backgroundDimEnabled">true</item>
+		<item name="windowNoTitle">true</item>
+		<item name="android:backgroundDimAmount">0.9</item>
+		<item name="android:windowAnimationStyle">@style/PauseDialogAnimation</item>
+	</style>
+
+	<style name="PauseDialogAnimation">
+		<item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+		<item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+	</style>
+
+</resources>

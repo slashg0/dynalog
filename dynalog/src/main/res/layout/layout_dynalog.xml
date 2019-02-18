@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<ImageView
+		android:id="@+id/dyna_iv_header"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:background="#d00"
+		android:scaleType="fitXY"
+		android:visibility="visible"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"/>
+
+
+	<TextView
+		android:id="@+id/dyna_tv_title"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:layout_marginLeft="16dp"
+		android:layout_marginTop="8dp"
+		android:layout_marginEnd="16dp"
+		android:layout_marginRight="16dp"
+		android:gravity="center_vertical|start"
+		android:padding="4dp"
+		android:text="Title"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/dyna_iv_header"/>
+
+	<TextView
+		android:id="@+id/dyna_tv_message"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+		android:gravity="center_vertical|start"
+		android:padding="4dp"
+		android:text="Message"
+		android:textSize="14sp"
+		android:textStyle="normal"
+		app:layout_constraintEnd_toEndOf="@+id/dyna_tv_title"
+		app:layout_constraintStart_toStartOf="@+id/dyna_tv_title"
+		app:layout_constraintTop_toBottomOf="@+id/dyna_tv_title"/>
+
+	<View
+		android:id="@+id/view"
+		android:layout_width="0dp"
+		android:layout_height="1px"
+		android:background="#3000"
+		app:layout_constraintBottom_toTopOf="@id/dyna_ll_buttons"
+		app:layout_constraintEnd_toEndOf="@id/dyna_ll_buttons"
+		app:layout_constraintStart_toStartOf="@id/dyna_ll_buttons"/>
+
+	<LinearLayout
+		android:id="@+id/dyna_ll_buttons"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+		android:layout_marginBottom="0dp"
+		android:orientation="horizontal"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="@+id/dyna_tv_message"
+		app:layout_constraintTop_toBottomOf="@+id/dyna_tv_message"/>
+
+</android.support.constraint.ConstraintLayout>
