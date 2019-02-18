@@ -15,7 +15,7 @@ It's a simple library to init a beautiful dialog with the following components:
 
 The entire dialog can be configured with a simple JSON object:
 
-`
+```javascript
 {
  "title":"Title",
  "message":"This is a dynamically created dialog and you are required to respect the genius behind it :*",
@@ -37,4 +37,4 @@ The entire dialog can be configured with a simple JSON object:
      }
      ]
 }
-`
+```
