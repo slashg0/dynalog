@@ -14,12 +14,19 @@ import org.json.JSONObject;
  */
 public class ColorScheme {
 	public static final String TAG = ColorScheme.class.getSimpleName();
-	public static final String JSON_KEY = "text_color_scheme";
+	public static final String JSON_KEY = "color_scheme";
+	public static final String ACCENT_DEFAULT_STRING = "#007FFF";
+	public static final String PRIMARY_DEFAULT_STRING = "#2D2D2D";
+	public static final String SECONDARY_DEFAULT_STRING = "#6C6C6C";
+	public static final String INVERT_DEFAULT_STRING = "#fdfdfd";
+	public static final String BACKGROUND_DEFAULT_STRING = "#ffffff";
+	private static final String JSON_BACKGROUND_COLOR = "background_color";
 	private static final String JSON_ACCENT_COLOR = "accent_color";
 	private static final String JSON_PRIMARY_COLOR = "primary_color";
 	private static final String JSON_SECONDARY_COLOR = "secondary_color";
 	private static final String JSON_INVERT_COLOR = "invert_color";
-
+	@ColorInt
+	int backgroundColor;
 	@ColorInt
 	int accentColor;
 	@ColorInt
@@ -29,8 +36,8 @@ public class ColorScheme {
 	@ColorInt
 	int invertTextColor;
 
-	public ColorScheme(int accentColor, int primaryTextColor, int secondaryTextColor, int invertTextColor) {
-
+	public ColorScheme(int backgroundColor, int accentColor, int primaryTextColor, int secondaryTextColor, int invertTextColor) {
+		this.backgroundColor = backgroundColor;
 		this.accentColor = accentColor;
 		this.primaryTextColor = primaryTextColor;
 		this.secondaryTextColor = secondaryTextColor;
@@ -45,54 +52,76 @@ public class ColorScheme {
 	 */
 	@Nullable
 	public static ColorScheme fromJSON(@Nullable JSONObject object) {
+		Log.d(TAG, "fromJSON: " + object);
 		ColorScheme result;
+		String backgroundColorString = null;
 		String accentTextColorString = null;
 		String primaryTextColorString = null;
 		String secondaryTextColorString = null;
 		String invertTextColorString = null;
 
 		try {
+			backgroundColorString = object.optString(JSON_BACKGROUND_COLOR);
 			accentTextColorString = object.optString(JSON_ACCENT_COLOR);
 			primaryTextColorString = object.optString(JSON_PRIMARY_COLOR);
 			secondaryTextColorString = object.optString(JSON_SECONDARY_COLOR);
 			invertTextColorString = object.optString(JSON_INVERT_COLOR);
 		} catch (Exception e) {
-			Log.d(TAG, "fromJSON: failed to init ColorScheme", e);
+			Log.e(TAG, "fromJSON: failed to get color overrides, passing null, fromStrings() will handle it ");
 		}
 
-		result = ColorScheme.fromStrings(accentTextColorString, primaryTextColorString, secondaryTextColorString, invertTextColorString);
+		result = ColorScheme.fromStrings(backgroundColorString, accentTextColorString, primaryTextColorString, secondaryTextColorString, invertTextColorString);
 		return result;
 	}
 
-	public static ColorScheme fromStrings(String accentTextColorString, String primaryTextColorString, String secondaryTextColorString, String invertTextColorString) {
+	static @ColorInt
+	int safeParseColor(String colorCode, String fallbackCode) {
+		try {
+			return Color.parseColor(colorCode);
+		} catch (Exception e) {
+			Log.e(TAG, "safeParseColor: Couldn't parse color " + colorCode + ", using fallback");
+			return Color.parseColor(fallbackCode);
+		}
+	}
+
+	public static ColorScheme fromStrings(String backgroundColorString, String accentTextColorString, String primaryTextColorString, String secondaryTextColorString, String invertTextColorString) {
 		try {
 			@ColorInt
-			int accentTextColor = Color.parseColor(accentTextColorString);
+			int backgroundColor = safeParseColor(backgroundColorString, BACKGROUND_DEFAULT_STRING);
 			@ColorInt
-			int primaryTextColor = Color.parseColor(primaryTextColorString);
+			int accentTextColor = safeParseColor(accentTextColorString, ACCENT_DEFAULT_STRING);
 			@ColorInt
-			int secondaryTextColor = Color.parseColor(secondaryTextColorString);
+			int primaryTextColor = safeParseColor(primaryTextColorString, PRIMARY_DEFAULT_STRING);
 			@ColorInt
-			int invertTextColor = Color.parseColor(invertTextColorString);
+			int secondaryTextColor = safeParseColor(secondaryTextColorString, SECONDARY_DEFAULT_STRING);
+			@ColorInt
+			int invertTextColor = safeParseColor(invertTextColorString, INVERT_DEFAULT_STRING);
 
-			return new ColorScheme(accentTextColor, primaryTextColor, secondaryTextColor, invertTextColor);
+			return new ColorScheme(backgroundColor, accentTextColor, primaryTextColor, secondaryTextColor, invertTextColor);
 		} catch (Exception e) {
-			Log.e(TAG, "fromStrings: Couldn't create from Strings", e);
+			Log.d(TAG, "fromStrings", e);
+			Log.e(TAG, "fromStrings: Couldn't create from Strings, returning default");
 			return getDefault();
 		}
 	}
 
 	public static ColorScheme getDefault() {
 		@ColorInt
-		int accentTextColor = Color.parseColor("#007FFF");
+		int backgroundColor = Color.parseColor(BACKGROUND_DEFAULT_STRING);
 		@ColorInt
-		int primaryTextColor = Color.parseColor("#2D2D2D");
+		int accentTextColor = Color.parseColor(ACCENT_DEFAULT_STRING);
 		@ColorInt
-		int secondaryTextColor = Color.parseColor("#6C6C6C");
+		int primaryTextColor = Color.parseColor(PRIMARY_DEFAULT_STRING);
 		@ColorInt
-		int invertTextColor = Color.parseColor("#fdfdfd");
+		int secondaryTextColor = Color.parseColor(SECONDARY_DEFAULT_STRING);
+		@ColorInt
+		int invertTextColor = Color.parseColor(INVERT_DEFAULT_STRING);
 
-		return new ColorScheme(accentTextColor, primaryTextColor, secondaryTextColor, invertTextColor);
+		return new ColorScheme(backgroundColor, accentTextColor, primaryTextColor, secondaryTextColor, invertTextColor);
+	}
+
+	public int getBackgroundColor() {
+		return backgroundColor;
 	}
 
 	public int getAccentColor() {

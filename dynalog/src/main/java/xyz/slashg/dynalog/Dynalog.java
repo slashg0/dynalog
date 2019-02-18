@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -137,6 +136,7 @@ public class Dynalog extends AlertDialog {
 
 
 	public void setData(Builder data) {
+		layout.setBackgroundColor(data.getColorScheme().getBackgroundColor());
 		titleTextView.setText(data.getTitle());
 		titleTextView.setTextColor(data.getColorScheme().getPrimaryTextColor());
 		messageTextView.setText(data.getMessage());
@@ -164,7 +164,7 @@ public class Dynalog extends AlertDialog {
 		private String message;
 		private String headerImageUrl;
 		private String iconImageUrl;
-		private ColorScheme colorScheme;
+		transient private ColorScheme colorScheme;
 		private ArrayList<ButtonBuilder> buttons;
 		private boolean isDismissible;
 
@@ -177,7 +177,7 @@ public class Dynalog extends AlertDialog {
 		@Nullable
 		public static Builder fromJSON(JSONObject object) {
 			Builder result = null;
-
+			Log.d(TAG, "fromJSON: " + object);
 			{
 				try {
 					Gson gson = GsonHelper.getGsonInstance();
