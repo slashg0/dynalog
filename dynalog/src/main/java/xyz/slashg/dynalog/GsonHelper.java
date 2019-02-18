@@ -9,8 +9,8 @@ import com.google.gson.GsonBuilder;
  * Any Gson related util methods must be added here.
  *
  * @author SlashG
- * @created 08/09/18
- * @since <nextVersion/>
+ * Created 08/09/18
+ * @since 0.5.0
  */
 public class GsonHelper {
 	private static Gson gson;

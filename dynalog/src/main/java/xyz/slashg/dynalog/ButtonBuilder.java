@@ -8,8 +8,8 @@ import android.support.annotation.StyleRes;
  * associated with a button in {@link Dynalog}.
  *
  * @author SlashG
- * @created 15/02/19
- * @since <nextVersion/>
+ * Created 15/02/19
+ * @since 0.5.0
  */
 public class ButtonBuilder {
 	public static final String TYPE_COLOURED = "coloured";

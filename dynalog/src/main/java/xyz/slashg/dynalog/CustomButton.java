@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 
 /**
  * @author SlashG
- * @created 15/02/19
- * @since <nextVersion/>
+ * Created 15/02/19
+ * @since 0.5.0
  */
 public class CustomButton extends AppCompatButton {
 	public CustomButton(Context context) {

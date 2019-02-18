@@ -9,8 +9,8 @@ import org.json.JSONObject;
 
 /**
  * @author SlashG
- * @created 14/02/19
- * @since <nextVersion/>
+ * Created 14/02/19
+ * @since 0.5.0
  */
 public class ColorScheme {
 	public static final String TAG = ColorScheme.class.getSimpleName();

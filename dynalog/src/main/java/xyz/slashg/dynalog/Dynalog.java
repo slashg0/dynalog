@@ -29,8 +29,8 @@ import java.util.ArrayList;
 
 /**
  * @author SlashG
- * @created 14/02/19
- * @since <nextVersion/>
+ * Created 14/02/19
+ * @since 0.5.0
  */
 public class Dynalog extends AlertDialog {
 
