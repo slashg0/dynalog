@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.7.0
+* Added DynaCounter
+* Added button click listener
+
+
 ## v0.6.1
 * Updated annotations
 * Possible crash fixes
