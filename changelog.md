@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.6.1
+* Updated annotations
+* Possible crash fixes
+
 ## v0.6.0
 * Added background colour override
 * Refactored JSON colour parsing
