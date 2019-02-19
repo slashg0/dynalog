@@ -34,7 +34,9 @@ class MainActivity : AppCompatActivity() {
                     "   ]\n" +
                     "}")
             val builder = Dynalog.Builder.fromJSON(json)
-            builder?.build(this)?.show()
+            var dynalog = builder?.build(this)
+            dynalog?.show()
+
         } catch (error: Exception) {
             Log.d("BLEH", "asdasd", error)
         }

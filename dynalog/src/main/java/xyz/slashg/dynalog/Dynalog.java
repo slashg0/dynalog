@@ -1,9 +1,7 @@
 package xyz.slashg.dynalog;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -40,7 +38,7 @@ public class Dynalog extends AlertDialog {
 	TextView messageTextView;
 	View layout;
 	boolean isInit = false;
-
+	ButtonClickListener buttonClickListener;
 
 	public Dynalog(@NonNull Context context) {
 		super(context, R.style.AppTheme_Dialog);
@@ -121,21 +119,22 @@ public class Dynalog extends AlertDialog {
 		isInit = true;
 	}
 
+	public void setButtonClickListener(ButtonClickListener buttonClickListener) {
+		this.buttonClickListener = buttonClickListener;
+	}
+
 	protected void onButtonClicked(int buttonIndex, ButtonBuilder builder, CustomButton button) {
-		Log.d(TAG, "onButtonClicked:  " + buttonIndex);
-		switch (builder.getAction()) {
-			case ButtonBuilder.ACTION_REDIRECT:
-				getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(builder.getActionParam())));
-				break;
-			case ButtonBuilder.ACTION_DISMISS:
-			default:
-				dismiss();
-				break;
+		if (buttonClickListener != null) {
+
+			buttonClickListener.onButtonClicked(buttonIndex, builder, button, this);
+		}
+		else {
+			Log.d(TAG, "onButtonClicked: Callback not init, ignoring");
 		}
 	}
 
-
 	public void setData(Builder data) {
+
 		layout.setBackgroundColor(data.getColorScheme().getBackgroundColor());
 		titleTextView.setText(data.getTitle());
 		titleTextView.setTextColor(data.getColorScheme().getPrimaryTextColor());
@@ -157,9 +156,14 @@ public class Dynalog extends AlertDialog {
 		setCancelable(data.isDismissible());
 	}
 
+	public interface ButtonClickListener {
+		void onButtonClicked(int buttonIndex, ButtonBuilder builder, CustomButton button, Dynalog dynalog);
+	}
+
 	// util method
 
 	public static class Builder {
+		private int id;
 		private String title;
 		private String message;
 		private String headerImageUrl;
@@ -167,6 +171,7 @@ public class Dynalog extends AlertDialog {
 		transient private ColorScheme colorScheme;
 		private ArrayList<ButtonBuilder> buttons;
 		private boolean isDismissible;
+		private int maxShowCount;
 
 		/**
 		 * JSON initer for {@link Dynalog}
@@ -189,6 +194,14 @@ public class Dynalog extends AlertDialog {
 			}
 
 			return result;
+		}
+
+		public int getMaxShowCount() {
+			return maxShowCount;
+		}
+
+		public int getId() {
+			return id;
 		}
 
 		public boolean isDismissible() {
