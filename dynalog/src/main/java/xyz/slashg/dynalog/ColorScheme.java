@@ -2,6 +2,7 @@ package xyz.slashg.dynalog;
 
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -50,7 +51,7 @@ public class ColorScheme {
 	 * @param object {@link JSONObject} to init {@link ColorScheme} from.
 	 * @return Instance of {@link ColorScheme} if successful, 'null' if failed.
 	 */
-	@Nullable
+	@NonNull
 	public static ColorScheme fromJSON(@Nullable JSONObject object) {
 		Log.d(TAG, "fromJSON: " + object);
 		ColorScheme result;
@@ -84,6 +85,7 @@ public class ColorScheme {
 		}
 	}
 
+	@NonNull
 	public static ColorScheme fromStrings(String backgroundColorString, String accentTextColorString, String primaryTextColorString, String secondaryTextColorString, String invertTextColorString) {
 		try {
 			@ColorInt
