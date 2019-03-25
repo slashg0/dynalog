@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.7.1
+* Added proguard protection for Builder DynaCounter
+
 ## v0.7.0
 * Added DynaCounter
 * Added button click listener

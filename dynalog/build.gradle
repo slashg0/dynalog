@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/slashg0/dynalog'
     gitUrl = 'https://github.com/slashg0/dynalog.git'
 
-    libraryVersion = '0.7.0'
+    libraryVersion = '0.7.1'
 
     developerId = 'slashg'
     developerName = 'Suroor Gupta'
@@ -34,7 +34,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 5
-        versionName "0.7.0"
+        versionName "0.7.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
