@@ -1,6 +1,9 @@
-package xyz.slashg.dynalog;
+package xyz.slashg.dynalog.builders;
 
 import android.support.annotation.StyleRes;
+
+import xyz.slashg.dynalog.Dynalog;
+import xyz.slashg.dynalog.R;
 
 /**
  * Builder for action button to be used in {@link Dynalog}

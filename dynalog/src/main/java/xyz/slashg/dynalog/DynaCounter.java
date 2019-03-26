@@ -4,6 +4,8 @@ import android.util.Log;
 
 import java.util.HashMap;
 
+import xyz.slashg.dynalog.builders.Builder;
+
 /**
  * @author SlashG
  * @created 19/02/19
@@ -18,7 +20,7 @@ public class DynaCounter extends HashMap<Integer, Integer> {
 		Log.d(TAG, "recordDialogShow:   final value = " + getShowCount(dynalogId));
 	}
 
-	public boolean shouldShouldDialog(Dynalog.Builder dynaBuilder) {
+	public boolean shouldShouldDialog(Builder dynaBuilder) {
 		if (dynaBuilder.getMaxShowCount() >= 0) {
 			if (getShowCount(dynaBuilder.getId()) >= dynaBuilder.getMaxShowCount()) {
 				Log.d(TAG, "shouldShouldDialog: max number of shows for the dialog reached");

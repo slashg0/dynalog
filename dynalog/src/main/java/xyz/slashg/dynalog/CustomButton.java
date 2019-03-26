@@ -8,6 +8,8 @@ import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import xyz.slashg.dynalog.builders.ButtonBuilder;
+
 
 /**
  * @author SlashG

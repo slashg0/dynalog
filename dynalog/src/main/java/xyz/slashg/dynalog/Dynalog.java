@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -20,9 +19,7 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
+import xyz.slashg.dynalog.builders.ButtonBuilder;
 
 /**
  * @author SlashG
@@ -133,7 +130,7 @@ public class Dynalog extends AlertDialog {
 		}
 	}
 
-	public void setData(Builder data) {
+	public void setData(xyz.slashg.dynalog.builders.Builder data) {
 
 		layout.setBackgroundColor(data.getColorScheme().getBackgroundColor());
 		titleTextView.setText(data.getTitle());
@@ -162,83 +159,4 @@ public class Dynalog extends AlertDialog {
 
 	// util method
 
-	public static class Builder {
-		private int id;
-		private String title;
-		private String message;
-		private String headerImageUrl;
-		private String iconImageUrl;
-		transient private ColorScheme colorScheme;
-		private ArrayList<ButtonBuilder> buttons;
-		private boolean isDismissible;
-		private int maxShowCount;
-
-		/**
-		 * JSON initer for {@link Dynalog}
-		 *
-		 * @param object {@link JSONObject} to init {@link Dynalog} from.
-		 * @return Instance of {@link Dynalog} if successful, 'null' if failed.
-		 */
-		@Nullable
-		public static Builder fromJSON(JSONObject object) {
-			Builder result = null;
-			Log.d(TAG, "fromJSON: " + object);
-			{
-				try {
-					Gson gson = GsonHelper.getGsonInstance();
-					result = gson.fromJson(object.toString(), Builder.class);
-					result.colorScheme = ColorScheme.fromJSON(object.optJSONObject(ColorScheme.JSON_KEY));
-				} catch (Exception e) {
-					Log.d(TAG, "fromJSON: failed to init Dynalog", e);
-				}
-			}
-
-			return result;
-		}
-
-		public int getMaxShowCount() {
-			return maxShowCount;
-		}
-
-		public int getId() {
-			return id;
-		}
-
-		public boolean isDismissible() {
-			return isDismissible;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public String getMessage() {
-			return message;
-		}
-
-		public String getHeaderImageUrl() {
-			return headerImageUrl;
-		}
-
-		public String getIconImageUrl() {
-			return iconImageUrl;
-		}
-
-		public ColorScheme getColorScheme() {
-			return colorScheme;
-		}
-
-		@NonNull
-		public ArrayList<ButtonBuilder> getButtons() {
-			if (buttons == null) { buttons = new ArrayList<>(); }
-			return buttons;
-		}
-
-		public Dynalog build(@NonNull Context context) {
-			Dynalog dynalog = new Dynalog(context);
-			dynalog.setData(this);
-			return dynalog;
-		}
-
-	}
 }
