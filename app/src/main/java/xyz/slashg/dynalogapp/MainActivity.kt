@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import org.json.JSONObject
 import xyz.slashg.dynalog.Dynalog
+import xyz.slashg.dynalog.builders.Builder
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                     "      }\n" +
                     "   ]\n" +
                     "}")
-            val builder = Dynalog.Builder.fromJSON(json)
+            val builder = Builder.fromJSON(json)
             var dynalog = builder?.build(this)
             dynalog?.show()
 

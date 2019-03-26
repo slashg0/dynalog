@@ -1,6 +1,11 @@
 package xyz.slashg.dynalog;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
+
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -14,10 +19,37 @@ import xyz.slashg.dynalog.builders.Builder;
 public class DynaCounter extends HashMap<Integer, Integer> {
 	public static final String TAG = DynaCounter.class.getSimpleName();
 
+	/**
+	 * JSON initer for {@link DynaCounter}
+	 *
+	 * @param object {@link JSONObject} to init {@link DynaCounter} from.
+	 * @return Instance of {@link DynaCounter} if successful, 'null' if failed.
+	 */
+	@Nullable
+	public static DynaCounter fromJSON(JSONObject object) {
+		DynaCounter result = null;
+
+		{
+
+			try {
+				Gson gson = GsonHelper.getGsonInstance();
+				result = gson.fromJson(object.toString(), DynaCounter.class);
+			} catch (Exception e) {
+				Log.d(TAG, "fromJSON: failed to init DynaCounter", e);
+			}
+		}
+
+		return result;
+	}
+
 	public void recordDialogShow(int dynalogId) {
 		Log.d(TAG, "recordDialogShow: initial value = " + getShowCount(dynalogId));
 		put(dynalogId, getShowCount(dynalogId) + 1);
 		Log.d(TAG, "recordDialogShow:   final value = " + getShowCount(dynalogId));
+	}
+
+	public String toJSONString() {
+		return GsonHelper.getGsonInstance().toJson(this);
 	}
 
 	public boolean shouldShouldDialog(Builder dynaBuilder) {
