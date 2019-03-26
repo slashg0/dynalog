@@ -1,7 +1,8 @@
 # Changelog
 
 ## v0.7.2
-* Added proguard protection for Builder DynaCounter
+* Created 'builders' packageg
+* Changed proguard protection for Builder DynaCounter
 
 ## v0.7.1
 * Added proguard protection for Builder DynaCounter
