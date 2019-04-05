@@ -54,6 +54,8 @@ public class Builder {
 		return result;
 	}
 
+
+
 	public int getMaxShowCount() {
 		return maxShowCount;
 	}

@@ -19,6 +19,7 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import ru.noties.markwon.Markwon;
 import xyz.slashg.dynalog.builders.ButtonBuilder;
 
 /**
@@ -101,6 +102,53 @@ public class Dynalog extends AlertDialog {
 
 	}
 
+	/**
+	 * Method checks if the input is null or empty.
+	 * This method trims the input before checking its length.
+	 * Written for the love of clean
+	 * code.
+	 *
+	 * @param input The input to check.
+	 * @return 'true' if the the input is null or of zero length; 'false' otherwise.
+	 * @author SlashG
+	 * @added 23-09-2016
+	 * @since Version 3.2.1
+	 */
+	public static boolean isStringNullOrEmptyTrim(@Nullable String input) {
+
+		if (input != null) {
+			if (input.trim().length() > 0) {
+				return false;
+			}
+
+		}
+		return true;
+
+
+	}
+
+	/**
+	 * Method that checks a provided {@link String} and if it isn't
+	 * null/blank, sets it inside the provided {@link TextView} and
+	 * makes the {@link TextView} {@link View#VISIBLE}. If the
+	 * {@link String} is null/blank, the {@link TextView} is hidden ({@link View#GONE}).
+	 *
+	 * @param text     The {@link String} to check and set in the {@link TextView}
+	 * @param textView The {@link TextView} to set the value in (or hide).
+	 * @added 22/09/18
+	 * @author kreatryx
+	 * @since <nextVersion/>
+	 */
+	public static void setTextOrHide(@Nullable String text, @NonNull TextView textView) {
+		textView.setText(text);
+		if (isStringNullOrEmptyTrim(text)) {
+			textView.setVisibility(View.GONE);
+		}
+		else {
+			textView.setVisibility(View.VISIBLE);
+		}
+	}
+
 	public void applyTextColorScheme(ColorScheme colorScheme) {
 
 	}
@@ -122,7 +170,6 @@ public class Dynalog extends AlertDialog {
 
 	protected void onButtonClicked(int buttonIndex, ButtonBuilder builder, CustomButton button) {
 		if (buttonClickListener != null) {
-
 			buttonClickListener.onButtonClicked(buttonIndex, builder, button, this);
 		}
 		else {
@@ -133,12 +180,18 @@ public class Dynalog extends AlertDialog {
 	public void setData(xyz.slashg.dynalog.builders.Builder data) {
 
 		layout.setBackgroundColor(data.getColorScheme().getBackgroundColor());
-		titleTextView.setText(data.getTitle());
+		setTextOrHide(data.getTitle(), titleTextView);
 		titleTextView.setTextColor(data.getColorScheme().getPrimaryTextColor());
-		messageTextView.setText(data.getMessage());
+		if (isStringNullOrEmptyTrim(data.getMessage())) {
+			Markwon.setText(messageTextView, Markwon.markdown(getContext(), data.getMessage()));
+			messageTextView.setVisibility(View.VISIBLE);
+		}
+		else {
+			messageTextView.setVisibility(View.GONE);
+		}
 		messageTextView.setTextColor(data.getColorScheme().getSecondaryTextColor());
 		ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getContext()));        // Init UIL
-		safelyLoadImage(headerImageView, data.getHeaderImageUrl(), view -> view.setVisibility(View.GONE), view -> view.setVisibility(View.VISIBLE), null);
+		safelyLoadImage(headerImageView, data.getHeaderImageUrl(), view -> view.setVisibility(View.GONE), view -> view.setVisibility(View.VISIBLE), object -> Log.e(TAG, "setData: Couldn't load"));
 		applyTextColorScheme(data.getColorScheme());
 
 		// add buttons
