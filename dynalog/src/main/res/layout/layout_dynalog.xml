@@ -9,7 +9,7 @@
 		android:id="@+id/dyna_iv_header"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="#d00"
+		android:adjustViewBounds="true"
 		android:scaleType="fitXY"
 		android:visibility="visible"/>
 
@@ -21,9 +21,9 @@
 		android:layout_marginStart="16dp"
 		android:layout_marginLeft="16dp"
 		android:layout_marginTop="8dp"
-		android:background="#f00"
 		android:layout_marginEnd="16dp"
 		android:layout_marginRight="16dp"
+		android:background="#f00"
 		android:gravity="center_vertical|start"
 		android:padding="4dp"
 		android:text="Title"
@@ -36,6 +36,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="8dp"
+		android:layout_marginBottom="8dp"
 		android:background="#0f0"
 		android:gravity="center_vertical|start"
 		android:padding="4dp"
@@ -55,7 +56,6 @@
 		android:id="@+id/dyna_ll_buttons"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="8dp"
 		android:layout_marginBottom="0dp"
 		android:orientation="horizontal"/>
 

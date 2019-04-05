@@ -182,7 +182,7 @@ public class Dynalog extends AlertDialog {
 		layout.setBackgroundColor(data.getColorScheme().getBackgroundColor());
 		setTextOrHide(data.getTitle(), titleTextView);
 		titleTextView.setTextColor(data.getColorScheme().getPrimaryTextColor());
-		if (isStringNullOrEmptyTrim(data.getMessage())) {
+		if (!isStringNullOrEmptyTrim(data.getMessage())) {
 			Markwon.setText(messageTextView, Markwon.markdown(getContext(), data.getMessage()));
 			messageTextView.setVisibility(View.VISIBLE);
 		}

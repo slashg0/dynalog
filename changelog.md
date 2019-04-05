@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.4
+* (FIXED) 8dp of blank space between image and buttons
+* (FIXED) string null/empty check is inverted (needed '!' operator) for message text view
+
 ## v0.7.3
 * Enabled Markdown support
 * Refactored layout for dynalog
