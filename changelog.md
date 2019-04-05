@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.3
+* Enabled Markdown support
+* Refactored layout for dynalog
+
 ## v0.7.2
 * Created 'builders' packageg
 * Changed proguard protection for Builder DynaCounter
