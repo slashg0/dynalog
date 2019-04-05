@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.5
+* (FIXED) Alignment of message text view
+* Removed weird colours from title and message views
+
 ## v0.7.4
 * (FIXED) 8dp of blank space between image and buttons
 * (FIXED) string null/empty check is inverted (needed '!' operator) for message text view
